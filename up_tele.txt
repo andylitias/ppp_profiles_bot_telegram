@@ -1,4 +1,4 @@
-:local chatid "5003046846";
+:local chatid "836884933";
 :local bot "bot5417671031:AAFAUIbX4idiKaUshkhHEm9dzE_BvS1XRzs";
 :local nama "$user";
 :local ips [/ppp active get [find name=$nama] address];
