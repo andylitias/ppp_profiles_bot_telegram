@@ -1,0 +1,27 @@
+:local chatid "836884933";
+:local bot "bot5417671031:AAFAUIbX4idiKaUshkhHEm9dzE_BvS1XRzs";
+:local hostnya "$host";
+:local usercomment [/tool netwatch get [find host=$hostnya] comment];
+:local since [/tool netwatch get [find host=$hostnya] since];
+:local totalnet [/tool netwatch print count-only];
+:local terhubung [/tool netwatch print count-only where status=up];
+:local terputus [/tool netwatch print count-only where status=down];
+:local userterputus value="";
+:foreach user in=[/tool netwatch find where status=down] do={
+	:local comment [/tool netwatch get $user comment]
+	:do {
+		:set userterputus value=($userterputus.$comment.", ")
+	}
+}
+:local pesan "\E2\9C\85 *Terhubung $[/system identity get name]* 
+=======================
+User: *$usercomment*
+Host: *$host*
+Since: *$since*
+=======================
+Total Netwatch: *$totalnet*
+Terhubung: *$terhubung*
+Terputus: *$terputus*
+*$userterputus*
+======================="
+/tool fetch http-header-field="Content-Type: application/x-www-form-urlencoded; charset=UTF-8" mode=https keep-result=no http-data="text=$pesan"  url="https://api.telegram.org/$bot/sendMessage\?chat_id=$chatid&parse_mode=markdown";
