@@ -1,0 +1,2 @@
+/ppp profile set on-up=[/file get up_tele.txt contents] [find name~""]
+/ppp profile set on-down=[/file get down_tele.txt contents] [find name~""]

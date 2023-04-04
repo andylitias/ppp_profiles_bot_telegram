@@ -1,0 +1,33 @@
+:local chatid "5003046846";
+:local bot "bot5417671031:AAFAUIbX4idiKaUshkhHEm9dzE_BvS1XRzs";
+:local nama "$user";
+:local profile [/ppp secret get [find name=$nama] profile];
+:local date "$[/system clock get date] $[/system clock get time]";
+:local reason [/ppp secret get [find name=$nama] last-disconnect-reason];
+:local secret [/ppp secret print count];
+:local status value="";
+:foreach pppuser in=[/ppp secret find ] do={
+	:local pppname [/ppp secret get $pppuser name]
+	:do {
+		:local tmp [/ppp active get [find where name="$pppname"]]
+	} on-error={
+		##:put $pppname
+		:set status value=($status.$pppname.", ")
+	}
+}
+:local active [/ppp active print count];
+:local terputus ($secret - $active)
+
+:local pesan "\E2\9D\8C *LOGOUT $[/system identity get name]*
+=======================
+Time: *$date*
+=======================
+User: *$user*
+Profile: *$profile*
+Reason: *$reason*
+=======================
+Total Secrets: *$secret*
+Total Active: *$active*
+Disconnected Users *($terputus)*: *$status*"
+
+/tool fetch http-method=post http-data="text=$pesan" url="https://api.telegram.org/$bot/sendMessage?chat_id=$chatid&parse_mode=markdown" mode=https keep-result=no http-header-field="Content-Type: application/x-www-form-urlencoded; charset=UTF-8, User-Agent: Firefox";
