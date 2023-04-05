@@ -3,7 +3,9 @@
 ## Copy dan paste kode di bawah ini di terminal
 /ppp profile set on-up=[/file get up_tele.txt contents] [find name~""]
 /ppp profile set on-down=[/file get down_tele.txt contents] [find name~""]
-=================================================================================
+
+
+
 ## Auto Update All Netwatch
 ## Simpan up dan down script di files dengan nama netwatch_up.txt dan netwatch_down.txt
 ## Copy dan paste kode di bawah ini di terminal
