@@ -1,2 +1,9 @@
+## Auto Update All PPP Profiles
+## Simpan up dan down script di files dengan nama up_tele.txt dan down_tele.txt
 /ppp profile set on-up=[/file get up_tele.txt contents] [find name~""]
 /ppp profile set on-down=[/file get down_tele.txt contents] [find name~""]
+
+## Auto Update All Netwatch
+## Simpan up dan down script di files dengan nama netwatch_up.txt dan netwatch_down.txt
+/tool netwatch set up-script=[/file get netwatch_up.txt contents] [find host~""]
+/tool netwatch set down-script=[/file get netwatch_down.txt contents] [find host~""]
